@@ -12,6 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer; 
+
+    //Jump Sound Effect 
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSound;
+
     
     void Update()
     {
@@ -20,6 +26,9 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButtonDown("Jump") && IsGrounded()){
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+
+            // Play the jump sound effect
+            audioSource.PlayOneShot(jumpSound);
         }
 
         if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f){
